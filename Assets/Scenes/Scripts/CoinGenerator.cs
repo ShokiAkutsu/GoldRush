@@ -7,19 +7,21 @@ public class CoinGenerator : MonoBehaviour
 	[Header("CoinPrefab‚ğŠi”[")]
 	[SerializeField] GameObject _coinPrefab;
 	[Header("Prefab¶¬•p“x")]
-	[SerializeField] float _interval = 1f;
+	[SerializeField] float _interval = 3f;
     [Header("Prefab‚Ì”­¶”ÍˆÍ(}XÀ•W â‘Î’l)")]
     [SerializeField] float _posLimitX = 10f;
+
     float _timer;
+	LaboratoryScript _laboratory;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	void Start()
+	{
+		//‹âs‚É•Ï‚¦‚é—\’è
+		_laboratory = GameObject.Find("Laboratory").GetComponent<LaboratoryScript>();
+		_interval = _laboratory.GetEffectParameter();
+	}
 
-    // Update is called once per frame
-    void Update()
+	void Update()
     {
         _timer += Time.deltaTime;
 
@@ -31,4 +33,9 @@ public class CoinGenerator : MonoBehaviour
             Coin.transform.position = new Vector3(posX, 10, 0);
         }
     }
+
+	public void LevelUpSet()
+	{
+		_interval = _laboratory.GetEffectParameter();
+	}
 }
